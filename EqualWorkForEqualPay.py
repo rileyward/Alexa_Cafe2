@@ -38,22 +38,18 @@ def cozmo_program(robot: cozmo.robot.Robot):
         current_action = robot.pickup_object(cubes[0], num_retries=5)
         current_action.wait_for_completed()
         if current_action.has_failed:
-            code, reason = current_action.failure_reason
-            result = current_action.result
-            print("Pickup Cube failed: code=%s reason='%s' result=%s" % (code, reason, result))
-            return
+            current_action = robot.pickup_object(cubes[0], num_retries=5)
+            current_action.wait_for_completed()
 
         # Now try to place that cube on the 2nd one
         current_action = robot.place_on_object(cubes[1], num_retries=5)
         current_action.wait_for_completed()
         if current_action.has_failed:
-            code, reason = current_action.failure_reason
-            result = current_action.result
-            print("Place On Cube failed: code=%s reason='%s' result=%s" % (code, reason, result))
-            return
+            current_action = robot.place_on_object(cubes[1], num_retries=5)
+            current_action.wait_for_completed()
 
     robot.say_text("Say person one was paid 20 dollars to "
-                   "make this stack.", voice_pitch=voice_pitch, duration_scalar=0.3).wait_for_completed()
+                   "make this stack.", voice_pitch=voice_pitch, duration_scalar=0.6).wait_for_completed()
     # KNOCKDOWN STACK HERE
 
     # DEMO STACK 2
@@ -70,19 +66,15 @@ def cozmo_program(robot: cozmo.robot.Robot):
         current_action = robot.pickup_object(cubes[0], num_retries=5)
         current_action.wait_for_completed()
         if current_action.has_failed:
-                code, reason = current_action.failure_reason
-                result = current_action.result
-                print("Pickup Cube failed: code=%s reason='%s' result=%s" % (code, reason, result))
-                return
+            current_action = robot.pickup_object(cubes[0], num_retries=5)
+            current_action.wait_for_completed()
 
         # Now try to place that cube on the 2nd one
         current_action = robot.place_on_object(cubes[1], num_retries=5)
         current_action.wait_for_completed()
         if current_action.has_failed:
-                code, reason = current_action.failure_reason
-                result = current_action.result
-                print("Place On Cube failed: code=%s reason='%s' result=%s" % (code, reason, result))
-                return
+            current_action = robot.place_on_object(cubes[1], num_retries=5)
+            current_action.wait_for_completed()
 
     robot.say_text("And say another person was paid only 15 dollars to make the exact same stack."
                    "This person had the same skill set as person one but they only were"
